@@ -176,7 +176,7 @@ input[type=number]{-moz-appearance:textfield}
       <a class="ad-btn ad-btn-amazon" href="#" target="_blank" rel="noopener">
         <span class="ad-btn-icon">🛒</span>Amazonで探す
       </a>
-      <a class="ad-btn ad-btn-rakuten" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank" rel="noopener">
+      <a class="ad-btn ad-btn-rakuten" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%89%E3%83%83%E3%82%B0%E3%83%95%E3%83%BC%E3%83%89%2B%E5%9B%BD%E7%94%A3%2F" rel="nofollow sponsored noopener" target="_blank">
         <span class="ad-btn-icon">🏪</span>楽天で探す
       </a>
     </div>
@@ -305,13 +305,13 @@ input[type=number]{-moz-appearance:textfield}
 
     <div class="ad-section">
       <div class="ad-section-title">🐶 PR・広告｜この計算結果に合うフードを探す</div>
-      <div class="ad-section-sub">体重・年齢に合わせたフードをチェックしてみましょう</div>
+      <div class="ad-section-sub" id="ad-search-label">体重・年齢に合わせたフードをチェックしてみましょう</div>
       <div class="ad-grid">
-        <a class="ad-btn ad-btn-amazon" href="#" target="_blank" rel="noopener">
-          <span class="ad-btn-icon">🛒</span>Amazonで探す
+        <a class="ad-btn ad-btn-amazon" id="ad-amazon-btn" href="#" target="_blank" rel="noopener">
+          <span class="ad-btn-icon">🛒</span><span id="ad-amazon-text">Amazonで探す</span>
         </a>
-        <a class="ad-btn ad-btn-rakuten" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank" rel="noopener">
-          <span class="ad-btn-icon">🏪</span>楽天で探す
+        <a class="ad-btn ad-btn-rakuten" id="ad-rakuten-btn" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank">
+          <span class="ad-btn-icon">🏪</span><span id="ad-rakuten-text">楽天で探す</span>
         </a>
       </div>
     </div>
@@ -442,9 +442,56 @@ function calculate() {
   document.getElementById('age-banner').innerHTML = ageLine;
 
   calcFood();
+  updateAdKeywords(size, dogAge, neutered);
   document.getElementById('result-wrap').classList.add('show');
   document.getElementById('ad-result').style.display = 'block';
   document.getElementById('result-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function updateAdKeywords(size, dogAge, neutered) {
+  // キーワードを条件で決定
+  let keyword = 'ドッグフード 国産';
+  let label = '国産ドッグフード';
+
+  if(dogAge !== null && dogAge < 1) {
+    keyword = 'ドッグフード 子犬 国産';
+    label = '子犬向け国産ドッグフード';
+  } else if(dogAge !== null && ((dogAge > 7 && size === 'large') || dogAge > 9)) {
+    keyword = 'ドッグフード シニア 国産';
+    label = 'シニア犬向け国産ドッグフード';
+  } else if(neutered) {
+    keyword = 'ドッグフード 去勢 避妊 国産';
+    label = '去勢・避妊犬向け国産ドッグフード';
+  } else if(size === 'small') {
+    keyword = 'ドッグフード 小型犬 国産';
+    label = '小型犬向け国産ドッグフード';
+  } else if(size === 'medium') {
+    keyword = 'ドッグフード 中型犬 国産';
+    label = '中型犬向け国産ドッグフード';
+  } else if(size === 'large') {
+    keyword = 'ドッグフード 大型犬 国産';
+    label = '大型犬向け国産ドッグフード';
+  }
+
+  // 楽天検索URL（アフィリエイトIDつき）
+  const rakutenSearchUrl = 'https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect='
+    + encodeURIComponent('https://search.rakuten.co.jp/search/mall/' + encodeURIComponent(keyword) + '/');
+
+  // Amazon検索URL（承認後にアフィリエイトタグを追加）
+  const amazonSearchUrl = 'https://www.amazon.co.jp/s?k=' + encodeURIComponent(keyword);
+
+  // ボタンのテキストとURLを更新
+  const rakutenBtn = document.getElementById('ad-rakuten-btn');
+  const amazonBtn = document.getElementById('ad-amazon-btn');
+  const rakutenText = document.getElementById('ad-rakuten-text');
+  const amazonText = document.getElementById('ad-amazon-text');
+  const adLabel = document.getElementById('ad-search-label');
+
+  if(rakutenBtn) rakutenBtn.href = rakutenSearchUrl;
+  if(amazonBtn) amazonBtn.href = amazonSearchUrl;
+  if(rakutenText) rakutenText.textContent = label + 'を楽天で探す';
+  if(amazonText) amazonText.textContent = label + 'をAmazonで探す';
+  if(adLabel) adLabel.textContent = '「' + label + '」の検索結果をチェック！';
 }
 
 function calcFood() {
