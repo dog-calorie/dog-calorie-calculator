@@ -100,7 +100,8 @@ input[type=number]{-moz-appearance:textfield}
 .ad-banner{background:linear-gradient(135deg,#fff8e1,#fffde7);border:1px solid #ffe082;border-radius:16px;padding:0.875rem 1.25rem;text-align:center;font-size:14px;color:#5a4a00;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:opacity 0.15s;box-shadow:0 2px 8px rgba(255,200,0,0.12)}
 .ad-banner:hover{opacity:0.85}
 .ad-banner-label{font-size:10px;color:#1a1a1a;text-align:center;margin-top:4px;margin-bottom:2px}
-.ad-result-old{background:linear-gradient(135deg,#e8f4fb,#e0f2fb);border:1.5px solid #90cce8;border-radius:16px;padding:1rem 1.25rem;text-align:center;margin-top:1rem}
+.ad-result-hidden{display:none !important}
+.ad-result-visible{display:block !important}
 .ad-result-old a{font-size:15px;font-weight:600;color:#2c4a6e;text-decoration:none;display:block;margin-bottom:4px}
 .ad-result-old a:hover{text-decoration:underline}
 .ad-result-old p{font-size:12px;color:#2c4a6e}
@@ -298,7 +299,7 @@ input[type=number]{-moz-appearance:textfield}
   </div><!-- /result-wrap -->
 
   <!-- ③広告：結果直下 -->
-  <div id="ad-result" style="display:none">
+  <div id="ad-result" class="ad-result-hidden">
 
     <div class="ad-section">
       <div class="ad-section-title">🐶 PR・広告｜この計算結果に合うフードを探す</div>
@@ -445,11 +446,11 @@ function calculate() {
   calcFood();
   updateAdKeywords(size, dogAge, neutered);
   document.getElementById('result-wrap').classList.add('show');
-  const adResult = document.getElementById('ad-result');
-  adResult.style.setProperty('display','block','important');
+  document.getElementById('ad-result').classList.remove('ad-result-hidden');
+  document.getElementById('ad-result').classList.add('ad-result-visible');
   setTimeout(function(){
-    document.getElementById('result-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});
-  }, 100);
+    document.getElementById('age-banner').scrollIntoView({behavior:'smooth',block:'start'});
+  }, 150);
 }
 
 function updateAdKeywords(size, dogAge, neutered) {
