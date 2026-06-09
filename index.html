@@ -10,14 +10,14 @@
 <meta name="keywords" content="犬 カロリー計算,ドッグフード 給餌量,犬 必要カロリー,DER 犬,RER 犬,犬 食事量 計算,ペット カロリー,犬 ダイエット,犬 体重管理,給与量 計算">
 <meta name="author" content="愛犬カロリー計算ツール">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dog-calorie.github.io/dog-calorie-calculator/　　/index.html">
+<link rel="canonical" href="https://あなたのGitHubPagesのURL/index.html">
 
 <!-- ===== OGP（SNSシェア対策） ===== -->
 <meta property="og:title" content="犬のカロリー計算ツール｜1日の必要カロリー・給餌量を無料計算">
 <meta property="og:description" content="愛犬の体重・年齢・活動レベルを入力するだけで1日の必要カロリーと給餌量がわかる無料ツールです。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://dog-calorie.github.io/dog-calorie-calculator/　　/index.html">
-<meta property="og:image" content="https://dog-calorie.github.io/dog-calorie-calculator/　　/dog.jpg">
+<meta property="og:url" content="https://あなたのGitHubPagesのURL/index.html">
+<meta property="og:image" content="https://あなたのGitHubPagesのURL/dog.jpg">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="愛犬カロリー計算ツール">
 
@@ -25,7 +25,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="犬のカロリー計算ツール｜1日の必要カロリー・給餌量を無料計算">
 <meta name="twitter:description" content="愛犬の体重・年齢・活動レベルを入力するだけで1日の必要カロリーと給餌量がわかる無料ツールです。">
-<meta name="twitter:image" content="https://dog-calorie.github.io/dog-calorie-calculator/　　/dog.jpg">
+<meta name="twitter:image" content="https://あなたのGitHubPagesのURL/dog.jpg">
 
 <!-- ===== 構造化データ（Googleリッチリザルト対策） ===== -->
 <script type="application/ld+json">
@@ -167,8 +167,8 @@ input[type=number]{-moz-appearance:textfield}
   </div>
 </div>
 
-<!-- ①広告：ヒーロー下 Amazon＋楽天 -->
-<div class="wrap" style="padding-top:1rem;padding-bottom:0">
+<!-- ①広告：ヒーロー下 Amazon＋楽天 ※審査完了後にstyle="display:none"を削除してください -->
+<div class="wrap" style="padding-top:1rem;padding-bottom:0;display:none"><!-- 審査完了後にdisplay:noneを削除 -->
   <div class="ad-section">
     <div class="ad-section-title">🛒 PR・広告</div>
     <div class="ad-section-sub">愛犬にぴったりのフードを探してみませんか？</div>
@@ -241,8 +241,8 @@ input[type=number]{-moz-appearance:textfield}
     </div>
   </div>
 
-  <!-- ②広告：ボタン上 A8.net -->
-  <div class="ad-section" style="margin-bottom:0.75rem">
+  <!-- ②広告：ボタン上 A8.net ※審査完了後にdisplay:noneを削除してください -->
+  <div class="ad-section" style="margin-bottom:0.75rem;display:none"><!-- 審査完了後にdisplay:noneを削除 -->
     <div class="ad-section-title">💡 PR・広告</div>
     <div class="ad-section-sub">適正カロリーがわかったら、フード選びも見直してみましょう</div>
     <a class="ad-btn ad-btn-a8" href="#" target="_blank" rel="noopener" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
@@ -443,7 +443,8 @@ function calculate() {
 
   calcFood();
   document.getElementById('result-wrap').classList.add('show');
-  document.getElementById('ad-result').style.display = 'block';
+  // ※審査完了後に下の行のコメントアウトを外してください
+  // document.getElementById('ad-result').style.display = 'block';
   document.getElementById('result-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
