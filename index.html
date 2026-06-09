@@ -168,7 +168,7 @@ input[type=number]{-moz-appearance:textfield}
 </div>
 
 <!-- ①広告：ヒーロー下 Amazon＋楽天 ※審査完了後にstyle="display:none"を削除してください -->
-<div class="wrap" style="padding-top:1rem;padding-bottom:0;display:none"><!-- 審査完了後にdisplay:noneを削除 -->
+<div class="wrap" style="padding-top:1rem;padding-bottom:0">
   <div class="ad-section">
     <div class="ad-section-title">🛒 PR・広告</div>
     <div class="ad-section-sub">愛犬にぴったりのフードを探してみませんか？</div>
@@ -176,7 +176,7 @@ input[type=number]{-moz-appearance:textfield}
       <a class="ad-btn ad-btn-amazon" href="#" target="_blank" rel="noopener">
         <span class="ad-btn-icon">🛒</span>Amazonで探す
       </a>
-      <a class="ad-btn ad-btn-rakuten" href="#" target="_blank" rel="noopener">
+      <a class="ad-btn ad-btn-rakuten" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank" rel="noopener">
         <span class="ad-btn-icon">🏪</span>楽天で探す
       </a>
     </div>
@@ -301,7 +301,7 @@ input[type=number]{-moz-appearance:textfield}
   </div><!-- /result-wrap -->
 
   <!-- ③広告：結果直下 -->
-  <div id="ad-result" style="display:none">
+  <div id="ad-result" style="display:none" data-ready="true">
 
     <div class="ad-section">
       <div class="ad-section-title">🐶 PR・広告｜この計算結果に合うフードを探す</div>
@@ -310,7 +310,7 @@ input[type=number]{-moz-appearance:textfield}
         <a class="ad-btn ad-btn-amazon" href="#" target="_blank" rel="noopener">
           <span class="ad-btn-icon">🛒</span>Amazonで探す
         </a>
-        <a class="ad-btn ad-btn-rakuten" href="#" target="_blank" rel="noopener">
+        <a class="ad-btn ad-btn-rakuten" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank" rel="noopener">
           <span class="ad-btn-icon">🏪</span>楽天で探す
         </a>
       </div>
@@ -332,7 +332,7 @@ input[type=number]{-moz-appearance:textfield}
     <div class="ad-section">
       <div class="ad-section-title">🏅 PR・広告｜楽天ポイントも貯まる！</div>
       <div class="ad-section-sub">楽天市場でお得にドッグフードをまとめ買い</div>
-      <a class="ad-btn ad-btn-rakuten" href="#" target="_blank" rel="noopener" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
+      <a class="ad-btn ad-btn-rakuten" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank" rel="noopener" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
         <span class="ad-btn-icon">🏪</span>楽天アフィリエイト｜ドッグフードを探す
       </a>
     </div>
@@ -443,8 +443,7 @@ function calculate() {
 
   calcFood();
   document.getElementById('result-wrap').classList.add('show');
-  // ※審査完了後に下の行のコメントアウトを外してください
-  // document.getElementById('ad-result').style.display = 'block';
+  document.getElementById('ad-result').style.display = 'block';
   document.getElementById('result-wrap').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
