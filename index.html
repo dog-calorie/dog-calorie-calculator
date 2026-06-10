@@ -353,11 +353,9 @@ document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 document.addEventListener('selectstart', function(e){ e.preventDefault(); });
 document.addEventListener('dragstart', function(e){ e.preventDefault(); });
 document.addEventListener('keydown', function(e){
-  // F12・Ctrl+U・Ctrl+S・Ctrl+Shift+I を無効化
-  if(e.key==='F12') e.preventDefault();
+  // Ctrl+U・Ctrl+S を無効化
   if(e.ctrlKey && (e.key==='u'||e.key==='U')) e.preventDefault();
   if(e.ctrlKey && (e.key==='s'||e.key==='S')) e.preventDefault();
-  if(e.ctrlKey && e.shiftKey && (e.key==='I'||e.key==='i')) e.preventDefault();
 });
 
 let currentDER = 0;
