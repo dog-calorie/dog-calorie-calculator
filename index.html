@@ -446,9 +446,6 @@ function calculate() {
   document.getElementById('result-wrap').classList.add('show');
   document.getElementById('ad-result').classList.remove('ad-result-hidden');
   document.getElementById('ad-result').classList.add('ad-result-visible');
-  setTimeout(function(){
-    document.getElementById('result-wrap').scrollIntoView({behavior:'smooth',block:'start'});
-  }, 150);
 }
 
 function updateAdKeywords(size, dogAge, neutered) {
