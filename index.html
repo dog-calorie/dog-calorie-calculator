@@ -95,6 +95,19 @@ input[type=number]{-moz-appearance:textfield}
 .refeed-btn{padding:0 14px;height:36px;border:1px solid #90cce8;border-radius:999px;font-size:13px;cursor:pointer;background:#e8f4fb;color:#3a3026;transition:opacity 0.15s;font-family:inherit}
 .refeed-btn:hover{opacity:0.8}
 .disclaimer{font-size:11px;color:#1a1a1a;margin-top:1rem;line-height:1.6;text-align:center}
+.weight-eval-card{display:none;margin-top:1rem;border-radius:20px;padding:1.25rem 1.5rem;border:1px solid #c8e8f5;background:#fff;box-shadow:0 2px 8px rgba(100,170,210,0.08)}
+.weight-eval-title{font-size:13px;font-weight:600;color:#2c4a6e;margin-bottom:0.75rem}
+.weight-bar-wrap{background:#e8f4fb;border-radius:999px;height:14px;margin:10px 0;position:relative}
+.weight-bar{height:14px;border-radius:999px;transition:width 0.6s ease}
+.weight-labels{display:flex;justify-content:space-between;font-size:10px;color:#6a9ab8;margin-bottom:4px}
+.weight-badge{display:inline-block;padding:4px 16px;border-radius:999px;font-size:13px;font-weight:700;margin:8px 0}
+.weight-comment{font-size:13px;color:#1a1a1a;line-height:1.7;margin-top:8px}
+.seo-article-card{display:none;margin-top:1rem;border-radius:20px;padding:1.25rem 1.5rem;background:#fff;border:1px solid #c8e8f5;box-shadow:0 2px 8px rgba(100,170,210,0.08)}
+.seo-article-title{font-size:15px;font-weight:700;color:#2c4a6e;margin-bottom:1rem;line-height:1.5}
+.seo-article-body{font-size:13px;color:#1a1a1a;line-height:1.9}
+.seo-article-body h4{font-size:13px;font-weight:600;color:#2c4a6e;margin:1rem 0 0.5rem}
+.seo-article-body ul{padding-left:1.2rem;margin:0.5rem 0}
+.seo-article-body li{margin-bottom:0.4rem}
 
 /* ===== 広告エリア ===== */
 .ad-banner{background:linear-gradient(135deg,#fff8e1,#fffde7);border:1px solid #ffe082;border-radius:16px;padding:0.875rem 1.25rem;text-align:center;font-size:14px;color:#5a4a00;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:opacity 0.15s;box-shadow:0 2px 8px rgba(255,200,0,0.12)}
@@ -294,6 +307,12 @@ input[type=number]{-moz-appearance:textfield}
 
     <p class="disclaimer">※ この結果は目安です。個体差があるため、体重・体型を定期的に確認しながら調整してください。<br>詳しくはかかりつけの獣医師にご相談ください。</p>
 
+    <!-- 体重評価 -->
+    <div class="weight-eval-card" id="weight-eval-card"></div>
+
+    <!-- SEO記事 -->
+    <div class="seo-article-card" id="seo-article-card"></div>
+
   </div><!-- /result-wrap -->
 
   <!-- ③広告：結果直下 -->
@@ -440,44 +459,65 @@ function calculate() {
   document.getElementById('age-banner').innerHTML = ageLine;
 
   calcFood();
-  updateAdKeywords(size, dogAge, neutered);
+  updateAdKeywords(size, dogAge, neutered, weight);
+  showWeightEval(size, dogAge, weight, neutered);
+  showSeoArticle(size, dogAge, weight, neutered, actFactor);
   document.getElementById('result-wrap').classList.add('show');
   document.getElementById('ad-result').style.display = 'block';
 }
 
-function updateAdKeywords(size, dogAge, neutered) {
-  // キーワードを条件で決定
+function updateAdKeywords(size, dogAge, neutered, weight) {
   let keyword = 'ドッグフード 国産';
   let label = '国産ドッグフード';
+  const isJunior = dogAge !== null && dogAge < 1;
+  const isSenior = dogAge !== null && ((dogAge > 7 && size === 'large') || dogAge > 9);
+  const isMiddleAge = dogAge !== null && dogAge >= 7 && dogAge <= 9;
 
-  if(dogAge !== null && dogAge < 1) {
-    keyword = 'ドッグフード 子犬 国産';
+  // 標準体重を取得
+  const stdWeight = getStandardWeight(size, dogAge);
+  const ratio = stdWeight ? weight / stdWeight : 1;
+  const isOverweight = ratio > 1.15;
+  const isUnderweight = ratio < 0.85;
+
+  if(isJunior) {
+    keyword = 'ドッグフード 子犬 ' + (size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬') + ' 国産';
     label = '子犬向け国産ドッグフード';
-  } else if(dogAge !== null && ((dogAge > 7 && size === 'large') || dogAge > 9)) {
-    keyword = 'ドッグフード シニア 国産';
+  } else if(isSenior && neutered && isOverweight) {
+    keyword = 'ドッグフード シニア 去勢 ダイエット 国産';
+    label = 'シニア犬・去勢済み・体重管理向けフード';
+  } else if(isSenior && neutered) {
+    keyword = 'ドッグフード シニア 去勢 国産';
+    label = 'シニア犬・去勢済み向け国産フード';
+  } else if(isSenior) {
+    keyword = 'ドッグフード シニア ' + (size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬') + ' 国産';
     label = 'シニア犬向け国産ドッグフード';
+  } else if(neutered && isOverweight) {
+    keyword = 'ドッグフード 去勢 ダイエット 体重管理 国産';
+    label = '去勢済み・ダイエット向け国産フード';
   } else if(neutered) {
-    keyword = 'ドッグフード 去勢 避妊 国産';
+    keyword = 'ドッグフード 去勢 避妊 ' + (size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬') + ' 国産';
     label = '去勢・避妊犬向け国産ドッグフード';
+  } else if(isOverweight) {
+    keyword = 'ドッグフード ダイエット 低カロリー ' + (size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬') + ' 国産';
+    label = 'ダイエット・低カロリー国産フード';
+  } else if(isUnderweight) {
+    keyword = 'ドッグフード 高カロリー 栄養補給 ' + (size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬') + ' 国産';
+    label = '高カロリー・栄養補給向け国産フード';
   } else if(size === 'small') {
-    keyword = 'ドッグフード 小型犬 国産';
+    keyword = 'ドッグフード 小型犬 成犬 国産';
     label = '小型犬向け国産ドッグフード';
   } else if(size === 'medium') {
-    keyword = 'ドッグフード 中型犬 国産';
+    keyword = 'ドッグフード 中型犬 成犬 国産';
     label = '中型犬向け国産ドッグフード';
-  } else if(size === 'large') {
-    keyword = 'ドッグフード 大型犬 国産';
+  } else {
+    keyword = 'ドッグフード 大型犬 成犬 国産';
     label = '大型犬向け国産ドッグフード';
   }
 
-  // 楽天検索URL（アフィリエイトIDつき）
   const rakutenSearchUrl = 'https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect='
     + encodeURIComponent('https://search.rakuten.co.jp/search/mall/' + encodeURIComponent(keyword) + '/');
-
-  // Amazon検索URL（承認後にアフィリエイトタグを追加）
   const amazonSearchUrl = 'https://www.amazon.co.jp/s?k=' + encodeURIComponent(keyword);
 
-  // ボタンのテキストとURLを更新
   const rakutenBtn = document.getElementById('ad-rakuten-btn');
   const amazonBtn = document.getElementById('ad-amazon-btn');
   const rakutenText = document.getElementById('ad-rakuten-text');
@@ -489,6 +529,122 @@ function updateAdKeywords(size, dogAge, neutered) {
   if(rakutenText) rakutenText.textContent = label + 'を楽天で探す';
   if(amazonText) amazonText.textContent = label + 'をAmazonで探す';
   if(adLabel) adLabel.textContent = '「' + label + '」の検索結果をチェック！';
+}
+
+function getStandardWeight(size, dogAge) {
+  // サイズ別の標準体重（kg）
+  const standards = {
+    small:  { junior: 2.5, adult: 4.0, senior: 3.5 },
+    medium: { junior: 8.0, adult: 15.0, senior: 13.0 },
+    large:  { junior: 15.0, adult: 30.0, senior: 27.0 }
+  };
+  const s = standards[size];
+  if(!s) return null;
+  if(dogAge === null) return s.adult;
+  if(dogAge < 1) return s.junior;
+  if((size==='large' && dogAge > 7) || dogAge > 9) return s.senior;
+  return s.adult;
+}
+
+function showWeightEval(size, dogAge, weight, neutered) {
+  const card = document.getElementById('weight-eval-card');
+  const stdWeight = getStandardWeight(size, dogAge);
+  if(!stdWeight) { card.style.display='none'; return; }
+
+  const ratio = weight / stdWeight;
+  let level, badge, color, barColor, barWidth, comment, keyword;
+
+  if(ratio < 0.80) {
+    level='痩せている'; badge='😟 痩せている'; color='#e53935'; barColor='#e53935'; barWidth=10;
+    comment='標準目安より体重が少なめです。愛犬の様子を見ながら、ぴったりのフードを見つけてあげましょう。';
+    keyword='ドッグフード 高カロリー 栄養補給 国産';
+  } else if(ratio < 0.92) {
+    level='痩せ気味'; badge='😐 痩せ気味'; color='#ff7043'; barColor='#ff7043'; barWidth=28;
+    comment='標準目安よりやや少なめです。愛犬の様子を見ながら、ぴったりのフードを見つけてあげましょう。';
+    keyword='ドッグフード 高栄養 体重増加 国産';
+  } else if(ratio <= 1.10) {
+    level='標準'; badge='✅ 標準'; color='#2e7d32'; barColor='#43a047'; barWidth=55;
+    comment='標準目安の範囲内です。現在の生活習慣を継続してみましょう。';
+    keyword='ドッグフード バランス 国産';
+  } else if(ratio <= 1.25) {
+    level='やや太り気味'; badge='⚠️ やや太り気味'; color='#f57f17'; barColor='#ffa726'; barWidth=75;
+    comment='標準目安より少し多めです。愛犬の様子を見ながら、ぴったりのフードを見つけてあげましょう。';
+    keyword='ドッグフード ダイエット 低カロリー 国産';
+  } else {
+    level='太っている'; badge='🚨 太っている'; color='#b71c1c'; barColor='#e53935'; barWidth=95;
+    comment='標準目安より大幅に多めです。愛犬の様子を見ながら、ぴったりのフードを見つけてあげましょう。';
+    keyword='ドッグフード ダイエット 肥満 減量 国産';
+  }
+
+  const sizeLabel = size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬';
+  const ageLabel = dogAge===null?'':dogAge<1?'子犬・':dogAge>9?'シニア犬・':'成犬・';
+
+  card.innerHTML = `
+    <div class="weight-eval-title">⚖️ 体重評価</div>
+    <div class="weight-labels">
+      <span>痩せている</span><span>痩せ気味</span><span>標準</span><span>やや太り気味</span><span>太っている</span>
+    </div>
+    <div class="weight-bar-wrap">
+      <div class="weight-bar" style="width:${barWidth}%;background:${barColor}"></div>
+    </div>
+    <div><span class="weight-badge" style="background:${color}1a;color:${color};border:1px solid ${color}66">${badge}</span></div>
+    <div style="font-size:12px;color:#6a9ab8;margin-bottom:6px">
+      ${sizeLabel}・${ageLabel}体重 ${weight}kg（標準目安：${stdWeight}kg）
+    </div>
+    <div class="weight-comment">${comment}</div>
+  `;
+  card.style.display = 'block';
+}
+
+function showSeoArticle(size, dogAge, weight, neutered, actFactor) {
+  const card = document.getElementById('seo-article-card');
+  const sizeLabel = size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬';
+  const stdWeight = getStandardWeight(size, dogAge);
+  const ratio = stdWeight ? weight/stdWeight : 1;
+
+  let ageLabel, ageAdvice;
+  if(dogAge===null) { ageLabel='成犬'; ageAdvice='愛犬に合ったフードをじっくり比較してみましょう。'; }
+  else if(dogAge<1) { ageLabel='子犬'; ageAdvice='まずはパピー用フードの成分表示を確認してみましょう。'; }
+  else if((size==='large'&&dogAge>7)||dogAge>9) { ageLabel='シニア犬'; ageAdvice='シニア犬向けに作られたフードにはさまざまな種類があります。愛犬の様子を見ながら、ぴったりのフードを見つけてあげましょう。'; }
+  else { ageLabel='成犬'; ageAdvice='愛犬に合ったフードをじっくり比較してみましょう。'; }
+
+  let weightAdvice;
+  if(ratio<0.92) weightAdvice='現在やや体重が少なめです。フード選びの参考にしてみてください。';
+  else if(ratio>1.10) weightAdvice='現在やや体重が多めです。フードの見直しを検討してみましょう。';
+  else weightAdvice='現在標準体重の範囲内です。このまま継続してみましょう。';
+
+  const neutAdvice = neutered ? '去勢・避妊後は体質が変わる場合があります。愛犬の様子を見ながら、ぴったりのフードを見つけてあげましょう。' : '';
+
+  let actAdvice;
+  if(actFactor<=0.8) actAdvice='運動量が少なめの犬向けに作られたフードもあります。愛犬の生活スタイルに合わせて選んでみましょう。';
+  else if(actFactor>=1.5) actAdvice='活動量が多い犬向けに作られたフードもあります。愛犬の活動量に合わせて選んでみましょう。';
+  else actAdvice='普通の活動量の犬向けの総合栄養食が多く販売されています。';
+
+  const title = `${sizeLabel}・${ageLabel}（${weight}kg）に最適な国産ドッグフードの選び方`;
+
+  card.innerHTML = `
+    <div class="seo-article-title">📖 ${title}</div>
+    <div class="seo-article-body">
+      <h4>🐾 愛犬の状態チェック</h4>
+      <ul>
+        <li>${weightAdvice}</li>
+        ${neutAdvice ? '<li>'+neutAdvice+'</li>' : ''}
+        <li>${actAdvice}</li>
+      </ul>
+      <h4>🍚 ${ageLabel}の${sizeLabel}に必要な栄養素</h4>
+      <ul>
+        <li>${ageAdvice}</li>
+        <li>原材料の表示をご確認の上、愛犬に合ったフードをお選びください。</li>
+        <li>添加物が気になる方は、無添加タイプの国産フードも多く販売されています。</li>
+      </ul>
+      <h4>🛒 おすすめフードを探す</h4>
+      <ul>
+        <li>楽天・Amazonで愛犬の条件に合ったフードを比較してみましょう。</li>
+        <li>定期購入プランを利用するとコストを抑えられます。</li>
+      </ul>
+    </div>
+  `;
+  card.style.display = 'block';
 }
 
 function calcFood() {
