@@ -297,7 +297,7 @@ input[type=number]{-moz-appearance:textfield}
   </div><!-- /result-wrap -->
 
   <!-- ③広告：結果直下 -->
-  <div id="ad-result" class="ad-result-hidden">
+  <div id="ad-result" style="display:none">
 
     <div class="ad-section">
       <div class="ad-section-title">🐶 PR・広告｜この計算結果に合うフードを探す</div>
@@ -444,8 +444,7 @@ function calculate() {
   calcFood();
   updateAdKeywords(size, dogAge, neutered);
   document.getElementById('result-wrap').classList.add('show');
-  document.getElementById('ad-result').classList.remove('ad-result-hidden');
-  document.getElementById('ad-result').classList.add('ad-result-visible');
+  document.getElementById('ad-result').style.display = 'block';
 }
 
 function updateAdKeywords(size, dogAge, neutered) {
