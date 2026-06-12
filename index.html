@@ -327,25 +327,29 @@ input[type=number]{-moz-appearance:textfield}
     </div>
 
     <!-- Amazon：承認後に表示 -->
-    <div class="ad-section" id="ad-amazon-section" style="display:none"><!-- 審査完了後にdisplay:noneを削除 -->
+    <div class="ad-section" id="ad-amazon-section">
       <div class="ad-section-title">🛒 PR・広告｜Amazonでも探す</div>
       <a class="ad-btn ad-btn-amazon" id="ad-amazon-btn" href="#" target="_blank" rel="noopener" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
         <span class="ad-btn-icon">🛒</span><span id="ad-amazon-text">Amazonで探す</span>
       </a>
     </div>
 
-    <!-- A8.net・バリューコマース：承認後に表示 -->
-    <div class="ad-section" style="display:none"><!-- 審査完了後にdisplay:noneを削除 -->
-      <div class="ad-section-title">🔍 PR・広告｜他のショップでも比較してみませんか？</div>
+    <!-- バリューコマース：承認済み表示 -->
+    <div class="ad-section">
+      <div class="ad-section-title">🔍 PR・広告｜Yahoo!ショッピングでも比較してみませんか？</div>
       <div class="ad-section-sub">複数のショップで比べてお得なフードを見つけましょう</div>
-      <div class="ad-grid">
-        <a class="ad-btn ad-btn-a8" href="#" target="_blank" rel="noopener">
-          <span class="ad-btn-icon">🌿</span>A8.net で探す
-        </a>
-        <a class="ad-btn ad-btn-vc" href="#" target="_blank" rel="noopener">
-          <span class="ad-btn-icon">🔷</span>バリューコマース
-        </a>
-      </div>
+      <a class="ad-btn ad-btn-vc" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3772920&pid=892631044" rel="nofollow noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
+        <span class="ad-btn-icon">🔷</span>Yahoo!ショッピングで探す
+      </a>
+    </div>
+
+    <!-- A8.net：承認後に表示 -->
+    <div class="ad-section" style="display:none"><!-- 審査完了後にdisplay:noneを削除 -->
+      <div class="ad-section-title">🌿 PR・広告｜A8.net おすすめフード</div>
+      <div class="ad-section-sub">厳選されたペットフードをチェックしてみましょう</div>
+      <a class="ad-btn ad-btn-a8" href="#" target="_blank" rel="noopener" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
+        <span class="ad-btn-icon">🌿</span>A8.net で探す
+      </a>
     </div>
 
     <div class="ad-section">
@@ -516,7 +520,7 @@ function updateAdKeywords(size, dogAge, neutered, weight) {
 
   const rakutenSearchUrl = 'https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect='
     + encodeURIComponent('https://search.rakuten.co.jp/search/mall/' + encodeURIComponent(keyword) + '/');
-  const amazonSearchUrl = 'https://www.amazon.co.jp/s?k=' + encodeURIComponent(keyword);
+  const amazonSearchUrl = 'https://www.amazon.co.jp/s?k=' + encodeURIComponent(keyword) + '&tag=dogcalorie-22-22';
 
   const rakutenBtn = document.getElementById('ad-rakuten-btn');
   const amazonBtn = document.getElementById('ad-amazon-btn');
