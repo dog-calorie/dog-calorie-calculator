@@ -126,6 +126,7 @@ input[type=number]{-moz-appearance:textfield}
 .ad-btn:hover{opacity:0.85}
 .ad-btn-amazon{background:linear-gradient(135deg,#ff9900,#ffb84d);color:#fff;border:none;box-shadow:0 3px 10px rgba(255,153,0,0.25)}
 .ad-btn-rakuten{background:linear-gradient(135deg,#bf0000,#e60000);color:#fff;border:none;box-shadow:0 3px 10px rgba(191,0,0,0.2)}
+.ad-btn-travel{background:linear-gradient(135deg,#1a6fa0,#2196f3);color:#fff;border:none;box-shadow:0 3px 10px rgba(26,111,160,0.25)}
 .ad-btn-a8{background:linear-gradient(135deg,#2c6e49,#40916c);color:#fff;border:none;box-shadow:0 3px 10px rgba(44,110,73,0.2)}
 .ad-btn-vc{background:linear-gradient(135deg,#1565c0,#1976d2);color:#fff;border:none;box-shadow:0 3px 10px rgba(21,101,192,0.2)}
 .ad-btn-icon{font-size:20px}
@@ -313,6 +314,15 @@ input[type=number]{-moz-appearance:textfield}
     <!-- SEO記事 -->
     <div class="seo-article-card" id="seo-article-card"></div>
 
+    <!-- 楽天トラベル ペット同伴宿 -->
+    <div class="ad-section" id="travel-ad-section" style="display:none">
+      <div class="ad-section-title">🏨 PR・広告｜愛犬と一緒に旅行しませんか？</div>
+      <div class="ad-section-sub" id="travel-ad-label">ペット同伴OKの宿を楽天トラベルで探してみましょう</div>
+      <a class="ad-btn ad-btn-travel" id="travel-ad-btn" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Ftravel.rakuten.co.jp%2Fpet%2F" rel="nofollow sponsored noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
+        <span class="ad-btn-icon">🐾</span><span id="travel-ad-text">愛犬と泊まれる宿を楽天トラベルで探す</span>
+      </a>
+    </div>
+
   </div><!-- /result-wrap -->
 
   <!-- ③広告：結果直下 -->
@@ -466,6 +476,7 @@ function calculate() {
   updateAdKeywords(size, dogAge, neutered, weight);
   showWeightEval(size, dogAge, weight, neutered);
   showSeoArticle(size, dogAge, weight, neutered, actFactor);
+  showTravelAd(size, dogAge);
   document.getElementById('result-wrap').classList.add('show');
   document.getElementById('ad-result').style.display = 'block';
 }
@@ -649,6 +660,44 @@ function showSeoArticle(size, dogAge, weight, neutered, actFactor) {
     </div>
   `;
   card.style.display = 'block';
+}
+
+function showTravelAd(size, dogAge) {
+  const section = document.getElementById('travel-ad-section');
+  const label = document.getElementById('travel-ad-label');
+  const text = document.getElementById('travel-ad-text');
+  const btn = document.getElementById('travel-ad-btn');
+
+  const BASE = 'https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=';
+  const PET_URL = encodeURIComponent('https://travel.rakuten.co.jp/pet/');
+
+  const isSenior = dogAge !== null && ((dogAge > 7 && size === 'large') || dogAge > 9);
+  const isJunior = dogAge !== null && dogAge < 1;
+  const sizeLabel = size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬';
+
+  let labelText, btnText;
+
+  if(isJunior) {
+    labelText = '子犬との初めての旅行を楽天トラベルで計画してみませんか？';
+    btnText = '子犬と泊まれるペットフレンドリーな宿を探す';
+  } else if(isSenior) {
+    labelText = 'シニア犬とのゆったり旅行を楽天トラベルで探してみませんか？';
+    btnText = 'シニア犬と泊まれる温泉・のんびり宿を探す';
+  } else if(size === 'small') {
+    labelText = '小型犬OKのペット同伴宿を楽天トラベルで探してみませんか？';
+    btnText = '小型犬と泊まれる宿を楽天トラベルで探す';
+  } else if(size === 'large') {
+    labelText = '大型犬OKのペット同伴宿を楽天トラベルで探してみませんか？';
+    btnText = '大型犬と泊まれる宿を楽天トラベルで探す';
+  } else {
+    labelText = 'ペット同伴OKの宿を楽天トラベルで探してみましょう';
+    btnText = '愛犬と泊まれる宿を楽天トラベルで探す';
+  }
+
+  if(label) label.textContent = labelText;
+  if(text) text.textContent = btnText;
+  if(btn) btn.href = BASE + PET_URL;
+  if(section) section.style.display = 'block';
 }
 
 function calcFood() {
