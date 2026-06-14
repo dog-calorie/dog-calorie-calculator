@@ -314,12 +314,12 @@ input[type=number]{-moz-appearance:textfield}
     <!-- SEO記事 -->
     <div class="seo-article-card" id="seo-article-card"></div>
 
-    <!-- 楽天トラベル ペット同伴宿 -->
+    <!-- ペット同伴宿 -->
     <div class="ad-section" id="travel-ad-section" style="display:none">
       <div class="ad-section-title">🏨 PR・広告｜愛犬と一緒に旅行しませんか？</div>
-      <div class="ad-section-sub" id="travel-ad-label">ペット同伴OKの宿を楽天トラベルで探してみましょう</div>
+      <div class="ad-section-sub" id="travel-ad-label">ペット同伴OKの宿を探してみましょう</div>
       <a class="ad-btn ad-btn-travel" id="travel-ad-btn" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Ftravel.rakuten.co.jp%2Fpet%2F" rel="nofollow sponsored noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
-        <span class="ad-btn-icon">🐾</span><span id="travel-ad-text">愛犬と泊まれる宿を楽天トラベルで探す</span>
+        <span class="ad-btn-icon">🐾</span><span id="travel-ad-text">愛犬と泊まれる宿を探す</span>
       </a>
     </div>
 
@@ -678,25 +678,25 @@ function showTravelAd(size, dogAge) {
   let labelText, btnText;
 
   if(isJunior) {
-    labelText = '子犬との初めての旅行を楽天トラベルで計画してみませんか？';
+    labelText = '子犬との初めての旅行を計画してみませんか？';
     btnText = '子犬と泊まれるペットフレンドリーな宿を探す';
   } else if(isSenior) {
-    labelText = 'シニア犬とのゆったり旅行を楽天トラベルで探してみませんか？';
+    labelText = 'シニア犬とのゆったり旅行を探してみませんか？';
     btnText = 'シニア犬と泊まれる温泉・のんびり宿を探す';
   } else if(size === 'small') {
-    labelText = '小型犬OKのペット同伴宿を楽天トラベルで探してみませんか？';
-    btnText = '小型犬と泊まれる宿を楽天トラベルで探す';
+    labelText = '小型犬OKのペット同伴宿を探してみませんか？';
+    btnText = '小型犬と泊まれる宿を探す';
   } else if(size === 'large') {
-    labelText = '大型犬OKのペット同伴宿を楽天トラベルで探してみませんか？';
-    btnText = '大型犬と泊まれる宿を楽天トラベルで探す';
+    labelText = '大型犬OKのペット同伴宿を探してみませんか？';
+    btnText = '大型犬と泊まれる宿を探す';
   } else {
-    labelText = 'ペット同伴OKの宿を楽天トラベルで探してみましょう';
-    btnText = '愛犬と泊まれる宿を楽天トラベルで探す';
+    labelText = 'ペット同伴OKの宿を探してみましょう';
+    btnText = '愛犬と泊まれる宿を探す';
   }
 
   if(label) label.textContent = labelText;
   if(text) text.textContent = btnText;
-  if(btn) btn.href = BASE + PET_URL;
+  if(btn) btn.href = 'https://dog-calorie.github.io/wantabi/';
   if(section) section.style.display = 'block';
 }
 
