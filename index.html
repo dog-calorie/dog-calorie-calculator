@@ -51,8 +51,7 @@
 body{font-family:'Hiragino Kaku Gothic Pro','Hiragino Sans',Meiryo,sans-serif;background-color:#e8f4fb;min-height:100vh;position:relative;overflow-x:hidden;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg transform='translate(30,20) rotate(-20,40,40)' opacity='0.22'%3E%3Cellipse cx='40' cy='58' rx='14' ry='18' fill='%2390cce8'/%3E%3Cellipse cx='18' cy='36' rx='10' ry='13' fill='%2390cce8'/%3E%3Cellipse cx='34' cy='28' rx='10' ry='13' fill='%2390cce8'/%3E%3Cellipse cx='52' cy='28' rx='10' ry='13' fill='%2390cce8'/%3E%3Cellipse cx='66' cy='36' rx='10' ry='13' fill='%2390cce8'/%3E%3C/g%3E%3Cg transform='translate(90,90) rotate(25,40,40)' opacity='0.18'%3E%3Cellipse cx='40' cy='58' rx='12' ry='16' fill='%2390cce8'/%3E%3Cellipse cx='20' cy='38' rx='9' ry='11' fill='%2390cce8'/%3E%3Cellipse cx='34' cy='30' rx='9' ry='11' fill='%2390cce8'/%3E%3Cellipse cx='50' cy='30' rx='9' ry='11' fill='%2390cce8'/%3E%3Cellipse cx='63' cy='38' rx='9' ry='11' fill='%2390cce8'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat;background-size:160px 160px}
 .wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:1.5rem 1rem 3rem}
 .hero{position:relative;height:420px;overflow:hidden;border-radius:0 0 40px 40px;background:#e8f4fb}
-.hero img{width:100%;height:100%;object-fit:contain;object-position:center top}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.08),rgba(255,255,255,0.82));border-radius:0 0 40px 40px}
+.hero img{width:100%;height:100%;object-fit:contain;object-position:center top}.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.08),rgba(255,255,255,0.82));border-radius:0 0 40px 40px}
 .hero-title{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap}
 .hero-title h1{font-size:24px;font-weight:700;color:#3a3026;letter-spacing:0.05em}
 .hero-title p{font-size:13px;color:#1a1a1a;margin-top:4px}
@@ -121,7 +120,8 @@ input[type=number]{-moz-appearance:textfield}
 .footer-ad{text-align:center;padding:1.25rem 1rem;font-size:11px;color:#1a1a1a;border-top:1px solid #c8e8f5;margin-top:1.5rem;line-height:1.8}
 
 /* ===== 広告グリッド（Amazon・楽天横並び） ===== */
-.ad-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0.5rem}
+.ad-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:0.5rem}
+.ad-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0.5rem}
 .ad-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0.75rem 0.5rem;border-radius:14px;text-decoration:none;font-size:13px;font-weight:600;transition:opacity 0.15s;gap:4px;line-height:1.4;text-align:center}
 .ad-btn:hover{opacity:0.85}
 .ad-btn-amazon{background:linear-gradient(135deg,#ff9900,#ffb84d);color:#fff;border:none;box-shadow:0 3px 10px rgba(255,153,0,0.25)}
@@ -134,8 +134,10 @@ input[type=number]{-moz-appearance:textfield}
 .ad-section-title{font-size:12px;font-weight:600;color:#2c4a6e;margin-bottom:0.75rem;display:flex;align-items:center;gap:4px}
 .ad-section-sub{font-size:11px;color:#1a1a1a;margin-bottom:0.75rem;line-height:1.6}
 @media(max-width:480px){
-  .ad-btn{font-size:12px;padding:0.65rem 0.4rem}
-  .ad-btn-icon{font-size:18px}
+  .ad-grid{grid-template-columns:1fr 1fr 1fr}
+  .ad-grid-2{grid-template-columns:1fr 1fr}
+  .ad-btn{font-size:11px;padding:0.6rem 0.3rem}
+  .ad-btn-icon{font-size:16px}
 }
 
 /* ===== スマホ対応 ===== */
@@ -182,13 +184,16 @@ input[type=number]{-moz-appearance:textfield}
   </div>
 </div>
 
-<!-- ①広告：ヒーロー下 楽天 -->
+<!-- ①広告：ヒーロー下 楽天・Amazon -->
 <div class="wrap" style="padding-top:1rem;padding-bottom:0">
   <div class="ad-section">
     <div class="ad-section-title">🛒 PR・広告</div>
     <div class="ad-section-sub">愛犬にぴったりのフードを探してみませんか？</div>
-    <a class="ad-btn ad-btn-rakuten" style="width:100%;border-radius:12px;flex-direction:row;gap:8px" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%89%E3%83%83%E3%82%B0%E3%83%95%E3%83%BC%E3%83%89%2B%E5%9B%BD%E7%94%A3%2F" rel="nofollow sponsored noopener" target="_blank">
+    <a class="ad-btn ad-btn-rakuten" style="width:100%;border-radius:12px;flex-direction:row;gap:8px;margin-bottom:8px" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%89%E3%83%83%E3%82%B0%E3%83%95%E3%83%BC%E3%83%89%2B%E5%9B%BD%E7%94%A3%2F" rel="nofollow sponsored noopener" target="_blank">
       <span class="ad-btn-icon">🏪</span>楽天で探す
+    </a>
+    <a class="ad-btn ad-btn-amazon" style="width:100%;border-radius:12px;flex-direction:row;gap:8px" href="https://www.amazon.co.jp/s?k=ドッグフード+国産&tag=dogcalorie-22-22" target="_blank" rel="noopener">
+      <span class="ad-btn-icon">🛒</span>Amazonで探す
     </a>
   </div>
 </div>
@@ -331,25 +336,16 @@ input[type=number]{-moz-appearance:textfield}
     <div class="ad-section">
       <div class="ad-section-title">🐶 PR・広告｜この計算結果に合うフードを探す</div>
       <div class="ad-section-sub" id="ad-search-label">体重・年齢に合わせたフードをチェックしてみましょう</div>
-      <a class="ad-btn ad-btn-rakuten" id="ad-rakuten-btn" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
-        <span class="ad-btn-icon">🏪</span><span id="ad-rakuten-text">楽天で探す</span>
+      <a class="ad-btn ad-btn-rakuten" id="ad-rakuten-btn" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px;margin-bottom:8px">
+        <span class="ad-btn-icon">🏪</span><span id="ad-rakuten-text">国産ドッグフードを楽天で探す</span>
       </a>
     </div>
 
-    <!-- Amazon：承認後に表示 -->
+    <!-- Amazon -->
     <div class="ad-section" id="ad-amazon-section">
       <div class="ad-section-title">🛒 PR・広告｜Amazonでも探す</div>
-      <a class="ad-btn ad-btn-amazon" id="ad-amazon-btn" href="#" target="_blank" rel="noopener" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
-        <span class="ad-btn-icon">🛒</span><span id="ad-amazon-text">Amazonで探す</span>
-      </a>
-    </div>
-
-    <!-- バリューコマース：承認済み表示 -->
-    <div class="ad-section">
-      <div class="ad-section-title">🔍 PR・広告｜Yahoo!ショッピングでも比較してみませんか？</div>
-      <div class="ad-section-sub">複数のショップで比べてお得なフードを見つけましょう</div>
-      <a class="ad-btn ad-btn-vc" href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3772920&pid=892631044" rel="nofollow noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
-        <span class="ad-btn-icon">🔷</span>Yahoo!ショッピングで探す
+      <a class="ad-btn ad-btn-amazon" id="ad-amazon-btn" href="https://www.amazon.co.jp/s?k=ドッグフード+国産&tag=dogcalorie-22-22" target="_blank" rel="noopener" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
+        <span class="ad-btn-icon">🛒</span><span id="ad-amazon-text">国産ドッグフードをAmazonで探す</span>
       </a>
     </div>
 
