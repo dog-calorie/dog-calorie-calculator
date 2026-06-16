@@ -78,10 +78,10 @@ input[type=number]{-moz-appearance:textfield}
 .metric{background:#fff;border-radius:16px;padding:1rem;border:1px solid #c8e8f5;text-align:center;box-shadow:0 2px 8px rgba(100,170,210,0.08)}
 .metric-label{font-size:11px;color:#2c4a6e;margin-bottom:4px}
 .metric-desc{font-size:11px;color:#1a1a1a;line-height:1.5;margin-bottom:8px}
-.metric-value{font-size:24px;font-weight:700}
+.metric-value{font-size:30px;font-weight:700;letter-spacing:-0.02em}
 .metric-unit{font-size:12px;color:#2c4a6e;margin-top:2px}
-.der-metric{background:#e8f4fb;border-color:#90cce8}
-.food-desc{font-size:12px;color:#1a1a1a;line-height:1.7;background:#f0f8fd;border-radius:10px;padding:0.6rem 0.875rem;margin-bottom:2px}
+.der-metric{background:#edf8f3;border-color:#7ec8a8}
+.food-desc{font-size:12px;color:#7a4f1a;line-height:1.7;background:#fff8ec;border-radius:10px;padding:0.6rem 0.875rem;margin-bottom:2px;border:1px solid #f0d090}
 .note-box{background:#fffde7;border:1px solid #ffe082;border-radius:16px;padding:1rem 1.25rem;margin-bottom:1rem;font-size:12px;color:#1a1a1a;line-height:1.8}
 .note-box p{margin-bottom:0.4rem}
 .note-box p:last-child{margin-bottom:0}
@@ -89,11 +89,11 @@ input[type=number]{-moz-appearance:textfield}
 .food-header{font-size:13px;font-weight:600;color:#2c4a6e;margin-bottom:0.75rem;display:flex;align-items:center;gap:6px}
 .food-input-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .food-input-row input{max-width:100px;height:36px;border-radius:12px}
-.feed-result{font-size:18px;font-weight:700;color:#2c4a6e;margin-bottom:6px}
+.feed-result{font-size:20px;font-weight:700;color:#1a1a1a;margin-bottom:6px}
 .feed-sub{font-size:13px;color:#2c4a6e}
 .refeed-btn{padding:0 14px;height:36px;border:1px solid #90cce8;border-radius:999px;font-size:13px;cursor:pointer;background:#e8f4fb;color:#3a3026;transition:opacity 0.15s;font-family:inherit}
 .refeed-btn:hover{opacity:0.8}
-.disclaimer{font-size:11px;color:#1a1a1a;margin-top:1rem;line-height:1.6;text-align:center}
+.disclaimer{font-size:11px;color:#a04040;margin-top:1rem;line-height:1.6;text-align:center;background:#fff0f0;border-radius:10px;padding:0.6rem 0.875rem;border:1px solid #f0c0c0}
 .weight-eval-card{display:none;margin-top:1rem;border-radius:20px;padding:1.25rem 1.5rem;border:1px solid #c8e8f5;background:#fff;box-shadow:0 2px 8px rgba(100,170,210,0.08)}
 .weight-eval-title{font-size:13px;font-weight:600;color:#2c4a6e;margin-bottom:0.75rem}
 .weight-bar-wrap{background:#e8f4fb;border-radius:999px;height:14px;margin:10px 0;position:relative}
@@ -163,7 +163,7 @@ input[type=number]{-moz-appearance:textfield}
   .act-item{padding:12px 14px;font-size:14px;min-height:48px}
   .calc-btn{height:56px;font-size:17px}
   .metrics{grid-template-columns:1fr 1fr}
-  .metric-value{font-size:20px}
+  .metric-value{font-size:26px}
   .food-input-row{flex-wrap:wrap;gap:6px}
   .food-input-row input{width:90px}
   .feed-result{font-size:16px}
@@ -304,14 +304,14 @@ input[type=number]{-moz-appearance:textfield}
       <div class="metric">
         <div class="metric-label">RER（安静時エネルギー）</div>
         <div class="metric-desc">寝ているだけで消費する<br>最低限のエネルギー量</div>
-        <div class="metric-value" id="rer-val" style="color:#3a3026">—</div>
+        <div class="metric-value" id="rer-val" style="color:#2c4a6e">—</div>
         <div class="metric-unit">kcal / 日</div>
       </div>
       <div class="metric der-metric">
-        <div class="metric-label" style="color:#3a3026">DER（1日必要カロリー）</div>
-        <div class="metric-desc" style="color:#3a3026">運動・年齢・去勢を加味した<br>実際に必要な1日の量</div>
-        <div class="metric-value" id="der-val" style="color:#3a3026">—</div>
-        <div class="metric-unit" style="color:#3a3026">kcal / 日</div>
+        <div class="metric-label" style="color:#2e7a5e">DER（1日必要カロリー）</div>
+        <div class="metric-desc" style="color:#2e7a5e">運動・年齢・去勢を加味した<br>実際に必要な1日の量</div>
+        <div class="metric-value" id="der-val" style="color:#3da87a">—</div>
+        <div class="metric-unit" style="color:#3da87a">kcal / 日</div>
       </div>
     </div>
 
@@ -332,7 +332,7 @@ input[type=number]{-moz-appearance:textfield}
         <span style="font-size:13px;color:#1a1a1a">kcal / 100g</span>
         <button class="refeed-btn" onclick="calcFood()">再計算</button>
       </div>
-      <div class="feed-result">1日の給餌量：<span id="feed-g">—</span> g</div>
+      <div class="feed-result">1日の給餌量：<span id="feed-g" style="font-size:32px;font-weight:700;color:#3da87a;letter-spacing:-0.02em">—</span> <span style="font-size:16px;color:#2e7a5e;font-weight:600">g</span></div>
       <div class="feed-sub" id="food-note"></div>
     </div>
 
@@ -405,15 +405,6 @@ input[type=number]{-moz-appearance:textfield}
       <div class="ad-section-sub">楽天市場でお得にドッグフードをまとめ買い</div>
       <a class="ad-btn ad-btn-rakuten" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2Fg00u1u54.2bo11f33.g00u1u54.2bo12f04%2Fa26060923451_4B5RS6_ATDIEQ_2HOM_BWGDT%3Fpc%3Dhttps%253A%252F%252Fitem.rakuten.co.jp%252Fcoco-gourmet%252F78%252F%26m%3Dhttp%253A%252F%252Fm.rakuten.co.jp%252Fcoco-gourmet%252Fi%252F10000049%252F%26rafcid%3Dwsc_i_is_a9f492a7-8ef9-40e2-ab89-4bc43a1ee283" rel="nofollow sponsored noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
         <span class="ad-btn-icon">🏪</span>楽天アフィリエイト｜ドッグフードを探す
-      </a>
-    </div>
-
-<!-- ペット同伴宿 -->
-    <div class="ad-section" id="travel-ad-section" style="display:none">
-      <div class="ad-section-title">🏨 PR・広告｜愛犬と一緒に旅行しませんか？</div>
-      <div class="ad-section-sub" id="travel-ad-label">ペット同伴OKの宿を探してみましょう</div>
-      <a class="ad-btn ad-btn-travel" id="travel-ad-btn" href="https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=https%3A%2F%2Ftravel.rakuten.co.jp%2Fpet%2F" rel="nofollow sponsored noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
-        <span class="ad-btn-icon">🐾</span><span id="travel-ad-text">愛犬と泊まれる宿を探す</span>
       </a>
     </div>
 
@@ -595,7 +586,6 @@ function calculate() {
   showWeightEval(size, dogAge, weight, neutered);
   showFoodReason(size, dogAge, neutered, weight);
   showSeoArticle(size, dogAge, weight, neutered, actFactor);
-  showTravelAd(size, dogAge);
   document.getElementById('result-wrap').classList.add('show');
   document.getElementById('ad-result').style.display = 'block';
   setTimeout(function(){
@@ -829,44 +819,6 @@ function showSeoArticle(size, dogAge, weight, neutered, actFactor) {
     </div>
   `;
   card.style.display = 'block';
-}
-
-function showTravelAd(size, dogAge) {
-  const section = document.getElementById('travel-ad-section');
-  const label = document.getElementById('travel-ad-label');
-  const text = document.getElementById('travel-ad-text');
-  const btn = document.getElementById('travel-ad-btn');
-
-  const BASE = 'https://rpx.a8.net/svt/ejp?a8mat=4B5RS6+ATDIEQ+2HOM+BWGDT&rakuten=y&a8ejpredirect=';
-  const PET_URL = encodeURIComponent('https://travel.rakuten.co.jp/pet/');
-
-  const isSenior = dogAge !== null && ((dogAge > 7 && size === 'large') || dogAge > 9);
-  const isJunior = dogAge !== null && dogAge < 1;
-  const sizeLabel = size==='small'?'小型犬':size==='medium'?'中型犬':'大型犬';
-
-  let labelText, btnText;
-
-  if(isJunior) {
-    labelText = '子犬との初めての旅行を計画してみませんか？';
-    btnText = '子犬と泊まれるペットフレンドリーな宿を探す';
-  } else if(isSenior) {
-    labelText = 'シニア犬とのゆったり旅行を探してみませんか？';
-    btnText = 'シニア犬と泊まれる温泉・のんびり宿を探す';
-  } else if(size === 'small') {
-    labelText = '小型犬OKのペット同伴宿を探してみませんか？';
-    btnText = '小型犬と泊まれる宿を探す';
-  } else if(size === 'large') {
-    labelText = '大型犬OKのペット同伴宿を探してみませんか？';
-    btnText = '大型犬と泊まれる宿を探す';
-  } else {
-    labelText = 'ペット同伴OKの宿を探してみましょう';
-    btnText = '愛犬と泊まれる宿を探す';
-  }
-
-  if(label) label.textContent = labelText;
-  if(text) text.textContent = btnText;
-  if(btn) btn.href = 'https://dog-calorie.github.io/wantabi/';
-  if(section) section.style.display = 'block';
 }
 
 function calcFood() {
