@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# サイトマップの場所をGoogleに伝える
+Sitemap: https://dog-calorie-calculator-1z0.pages.dev/sitemap.xml
