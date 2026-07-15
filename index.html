@@ -355,6 +355,16 @@ input[type=number]{-moz-appearance:textfield}
       <div class="food-reason-text" id="food-reason-text"></div>
     </div>
 
+    <!-- afb 中高齢犬サポート：シニア犬判定時のみ表示 -->
+    <div class="ad-section" id="ad-senior-support" style="display:none;margin-top:1rem">
+      <div class="ad-section-title">🐕 PR・広告｜中高齢犬の元気と健康をサポート</div>
+      <div class="ad-section-sub">シニア期の愛犬に。健康維持をサポートするフードをチェックしてみましょう</div>
+      <a class="ad-btn ad-btn-a8" href="https://t.afi-b.com/visit.php?a=Q13740Z-U456487m&p=2983915p" rel="nofollow noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
+        <span class="ad-btn-icon">🐕</span>中高齢犬サポートフードをチェックする
+      </a>
+      <img src="https://t.afi-b.com/lead/Q13740Z/2983915p/U456487m" width="1" height="1" style="border:none;">
+    </div>
+
     <!-- SEO記事 -->
     <div class="seo-article-card" id="seo-article-card"></div>
 
@@ -397,6 +407,16 @@ input[type=number]{-moz-appearance:textfield}
         <span class="ad-btn-icon">🥩</span>カナガンをチェックする
       </a>
       <img src="https://t.afi-b.com/lead/w15964D/2983915p/R522218o" width="1" height="1" style="border:none;">
+    </div>
+
+    <!-- afb 華味鳥ドッグフード：審査完了・afbリンク設定済み -->
+    <div class="ad-section">
+      <div class="ad-section-title">🍗 PR・広告｜料亭が手掛けた贅沢ドッグフード</div>
+      <div class="ad-section-sub">料亭「華味鳥」が作ったこだわりのドッグフードをチェックしてみましょう</div>
+      <a class="ad-btn ad-btn-a8" href="https://t.afi-b.com/visit.php?a=B10033T-p340142Z&p=2983915p" rel="nofollow noopener" target="_blank" style="width:100%;border-radius:12px;flex-direction:row;gap:8px">
+        <span class="ad-btn-icon">🍗</span>華味鳥のドッグフードをチェックする
+      </a>
+      <img src="https://t.afi-b.com/lead/B10033T/2983915p/p340142Z" width="1" height="1" style="border:none;">
     </div>
 
     <!-- A8.net：その他承認後に表示 -->
@@ -776,6 +796,9 @@ function showFoodReason(size, dogAge, neutered, weight) {
 
   text.textContent = reason;
   card.style.display = 'block';
+
+  const seniorAd = document.getElementById('ad-senior-support');
+  if(seniorAd) seniorAd.style.display = isSenior ? 'block' : 'none';
 }
 
 function showSeoArticle(size, dogAge, weight, neutered, actFactor) {
